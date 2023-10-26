@@ -7,4 +7,11 @@ services:
       image: sample-image-name
       context: .
       dockerfile: ./docker/Dockerfile
+    volumes:
+      - ./src:/src
+      - example-volume:/example_dir
     tty: true
+
+volumes:
+  example-volume:
+    name: sample-volume-name
