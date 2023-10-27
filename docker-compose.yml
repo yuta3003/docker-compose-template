@@ -4,9 +4,8 @@ version: "3"
 services:
   app:
     build:
-      image: sample-image-name
       context: .
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./docker/<環境名>/Dockerfile
     ports:
       - 80:80
     volumes:
