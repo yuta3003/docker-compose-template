@@ -5,7 +5,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./docker/<環境名>/Dockerfile
+      dockerfile: ./docker/ubuntu/Dockerfile
     ports:
       - 80:80
     volumes:
