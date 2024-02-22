@@ -15,6 +15,31 @@ services:
     networks:
       - frontend
       - backend
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:5.7
+    ports:
+    - "3306:3306"
+    environment:
+      MYSQL_DATABASE: mysql
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysqlpassword
+      MYSQL_ROOT_PASSWORD: rootpassword
+      TZ: Asia/Tokyo
+    restart: always
+    networks:
+    - frontend
+    - backend
+    volumes:
+    - mysql_data:/var/lib/mysql
+    # Health check to start application server after database startup check
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 2s
+      retries: 100
 
 networks:
   frontend:
@@ -34,3 +59,4 @@ networks:
 volumes:
   example-volume:
     name: sample-volume-name
+    driver: local
